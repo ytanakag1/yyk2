@@ -1,0 +1,79 @@
+@charset "utf-8";
+body {
+    margin: 50px 25px;    font-size: 1em;
+    font-family: Meiryo ,"Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+}
+.container,
+#calendar {
+    min-width: 700px; padding: 0 15px;
+    margin: 0 auto;
+}
+.response {
+    height: 60px;
+}
+.success {
+    background: #cdf3cd;    padding: 10px 60px;    border: #c3e6c3 1px solid;    display: inline-block;
+}
+#fm label{    width: 6em;
+    display: inline-block; }
+table tr td{    
+  border-bottom: 1px solid #ccc;  padding: 12px 0;
+}
+#fm input,#fm textarea,#fm select{
+  font-size: 1em; margin-top: 12px;
+}
+input[name="ninzu"]{width: 2em}
+input[name="email"]{width: 27em}
+input[name="zip"]{width: 7em}
+input[name="addr"]{width: 30em}
+input[type="password"]{width: 7em}
+#pswd_wrqap{display: none;}
+#fm i:before{content:"※ " ;color:#d65c74;font-size: .7em; font-weight: 600;}
+#fm i{color: #d65c74;  font-size: 0.8em;  margin-right: 1em;}
+.balloon {
+  display: none;    background-color: #fff0f0;    padding: 10px 20px;    position: absolute;    font-size: .8em;    border-radius: 5px;
+    border: 1px solid #777;    box-shadow: 3px 3px 4px #bbb;
+}
+.balloon:after {
+    border-bottom: 12px solid #fff0f0;    border-right: 12px solid transparent;    border-left: 12px solid transparent;    content: '';
+    margin-left: -10px;    position: absolute;    top: -12px;    left: 41%;
+    }
+.balloon:before {
+    border-bottom: 12px solid #777;    border-right: 15px solid transparent;    border-left: 15px solid transparent;    content: '';
+    margin-left: -13px;    position: absolute;    top: -13px;    left: 41%;
+}
+.balloon strong{
+  width: 23px;height: 23px; font-size: 2em;background: #0ff;
+}
+.balloon strong {
+    width: 23px;    height: 25px;    font-size: 1.5em;    background: #f5b82d;    display: block;   float: left;    padding: 0px 4px 2px 8px;    box-sizing: border-box;    color: #fff;    vertical-align: middle;    border-radius: 3px;    margin-right: 5px;
+}
+
+
+.dialog-in {
+  width: 50%;
+  height: 100%;
+  background: #424242b5;
+  box-shadow: 0px 1px 12px #999;
+  margin: auto;
+  border-radius: 6px;
+  position: relative;
+  z-index: 10;
+  padding: 66px 20px 0;
+}
+
+#dialog {
+  margin-top: 40vh;
+  padding: 30px 20px;
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  top: 0;
+  left: 0;
+}
+
+.acount{    position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 2em;}
