@@ -1,8 +1,8 @@
 <?php
 function connectDB( $dbname ){
 	$host = 'localhost';
-	$user = 'your name';
-	$psw =  'あんたのパスワード';
+	$user = 'ginzo';
+	$psw =  'Hjkl344300-';
  		$mydb = 'mysql:dbname='.$dbname.';host='.$host.';charset=utf8';
 
 	//try{

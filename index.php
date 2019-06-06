@@ -29,6 +29,8 @@
       <?php 
         if(isset($_SESSION['ninsho'])){
           echo "ようこそ",$_SESSION['ninsho']['kokyakuMei'] ,"さん";
+        }else{
+          echo "<a href='login.php'>ログイン</a>";
         }
       ?>
     </div>

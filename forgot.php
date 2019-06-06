@@ -2,9 +2,9 @@
 header("Content-type: text/html; charset=UTF-8");
 
     include "connect.php" ;
-    //include 'header.php';
     include 'mojifillter.php';
     $dbh = connectDB( "yyk" );
+    include 'header.php';
 ?>
 <script  src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="style.css" />
@@ -73,7 +73,7 @@ if ( !empty($_POST['forgot_soshin']) && !empty($_POST['email']) && empty($_POST[
                 echo $email  . "へ送信しました";
             }else{
                 //メールがないので
-                echo '<meta http-equiv="refresh" content="5; URL=\'./yoyaku.php\'" />
+                echo '<meta http-equiv="refresh" content="5; URL=\'./\'" />
                  <p>入力されたメールアドレスは登録がありません.<br>
                 ご予約フォームへ入力して送信してください.' ;
             }
@@ -157,7 +157,7 @@ function checkPassword( sp ) {
             $stmt->bindParam(1, $pswd, PDO::PARAM_STR);
             $stmt->bindParam(2, $token, PDO::PARAM_STR);
               $stmt->execute();
-            echo '<meta http-equiv="refresh" content="5; URL=\'yoyaku.php\'" />
+            echo '<meta http-equiv="refresh" content="5; URL=\'./\'" />
                  <p>パスワードの変更が完了しました.';    
     }
 
