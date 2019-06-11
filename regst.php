@@ -123,7 +123,7 @@ if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
     			echo $to  . "へ送信しました\n";
 									echo "<P>ご予約ありがとうございます。<br>只今確認メールを送信しました。</p>
 									<p><a href ='/'>Home</a>"; 
-			 $_SESSION=NULL ;  
+			 $_SESSION['yoyaku_post']=NULL ;  
 			 $_POST =NULL ;	
 	
 
