@@ -11,8 +11,8 @@ $(document).ready(function () {
                 event.allDay = false;
             }
         },
-        selectable: true,
-        selectHelper: true,
+        selectable: false,
+        selectHelper: false,
       
         select: function (start, end, allDay) {  //クリックイベント
          
@@ -25,20 +25,20 @@ $(document).ready(function () {
             return false;
         },
         
-        editable: true,
-        eventDrop: function (event, delta) {
-            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-            $.ajax({
-                url: 'edit-event.php',
-                data: 'title=' + event.title + '&start=' + start + '&yoyakuID=' + event.yoyakuID + '&id=' + event.id,
-                type: "POST",
-                success: function (response) {
-                    console.log(response);
-                    displayMessage("Updated Successfully");
-                }
-            });
-        },
+        editable: false,
+        // eventDrop: function (event, delta) {
+        //     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+        //     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+        //     $.ajax({
+        //         url: 'edit-event.php',
+        //         data: 'title=' + event.title + '&start=' + start + '&yoyakuID=' + event.yoyakuID + '&id=' + event.id,
+        //         type: "POST",
+        //         success: function (response) {
+        //             console.log(response);
+        //             displayMessage("Updated Successfully");
+        //         }
+        //     });
+        // },
         eventClick: function (event) {
             $('#delete').click(function(){
                 $.ajax({
@@ -60,13 +60,11 @@ $(document).ready(function () {
                 $(".inner").css("animation","modal 0.5s forwards");
                 $('#modal02').fadeIn();
                 $("#dialog").hide(300);
-          console.log(event);
                     if(event.category==0){
                         $("#kibojikan-lunch").trigger('click').prop('checked',true);
                     }else{
                         $("#kibojikan-dinner").trigger('click').prop('checked',true);
                     }
-console.log(event.start._i);
                     var dtmh = event.start._i.split(' ');
                     $('#kibobi').val(dtmh[0]);
                     $('#kibojikan').val(dtmh[1]);

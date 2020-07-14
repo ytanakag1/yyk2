@@ -14,7 +14,7 @@
     $eventArray = array();
    
     foreach ( $result as $row ) {
-        $row['title']= date("H:i",strtotime($row['start'])).','. $row['kokyakuMei'].','. $row['ninzu'].'名様';
+        $row['title']= date("H:i",strtotime($row['start'])). ','. $row['ninzu'].'名様';
             $mail = explode(',',$row['mail']) ;
             if( count( $mail ) === 2  ){
                 $row['mail'] = $mail[1];
