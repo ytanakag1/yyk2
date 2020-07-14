@@ -6,7 +6,6 @@ function h(&$a ,$b=true){
   if($b) 
     $a= str_replace("." , "｡" , $a); // mailの場合これは省く  
     $a= str_replace("\\" , "&yen;" , $a);
-    $a= str_replace("/" , "\/" , $a);
     $a= nl2br($a);
     return $a;
 } 

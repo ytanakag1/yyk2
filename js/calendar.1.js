@@ -47,9 +47,10 @@ $(document).ready(function () {
                     data: "&id=" + event.yoyakuID,
                     success: function (response) {
                         if(parseInt(response) > 0) {
-                            $('#calendar').fullCalendar('removeEvents', event.id);
+                            // $('#calendar').fullCalendar('removeEvents', event.id);
                             displayMessage("Deleted Successfully");
-                            $("#dialog").hide(300);
+                            $("#dialog").hide(100);
+                            location.reload();
                         }
                     }
                 })
@@ -59,8 +60,8 @@ $(document).ready(function () {
                 $(".inner").css("animation","modal 0.5s forwards");
                 $('#modal02').fadeIn();
                 $("#dialog").hide(300);
-                console.log(event);
-                if(event.category==0){
+          console.log(event);
+                    if(event.category==0){
                         $("#kibojikan-lunch").trigger('click').prop('checked',true);
                     }else{
                         $("#kibojikan-dinner").trigger('click').prop('checked',true);

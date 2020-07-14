@@ -1,7 +1,7 @@
 <?php  // kakunin.php
  session_start(); // セッションを使う場合に文字出力より前で宣言
     include "mojifillter.php";
-	    if ( @$_POST['token'] != session_id() ) {
+	    if ( @$_POST['token'] !=  $_SESSION['sid'] ) {
 	    	ex();  // フォームから送信されたトークンがサーバーと一致しなければ中断
 	    }
 

@@ -1,11 +1,11 @@
 <?php
 function connectDB( $dbname ){
 	$host = 'localhost';
-	$user = '****';
-	$psw =  '****-';
+	$user = 'ginzo';
+	$psw =  'Hjkl344300-';
  		$mydb = 'mysql:dbname='.$dbname.';host='.$host.';charset=utf8';
 
-	//try{
+	try{
 		$dbh=new PDO($mydb,$user,$psw ); //DBへ接続
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	// PDOのエラーモードを追加してください
@@ -13,9 +13,9 @@ function connectDB( $dbname ){
 		// 構文チェックと実行を分離したままにする 必須
 		$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // メモリ効率がいい
 			return $dbh;
-	// } catch (PDOException $e) {
-	// 	die('ConneCt Error: ' .$e->getCode()); //DB接続エラー時の処理
-	// }
+	} catch (PDOException $e) {
+		die('ConneCt Error: ' .$e->getCode()); //DB接続エラー時の処理
+	}
 }
 
 // DB問合せ実行のユーザ定義関数 名前は自由

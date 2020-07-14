@@ -1,10 +1,3 @@
-<?php 
-if(isset($_SESSION['ninsho'])){
-	$ninsho= $_SESSION['ninsho'];
-	echo "<script>var email = '", $ninsho['mail'] ,"'</script>";
-}
-?>
-
 <form name="fm" id="fm" action="kakunin.php" method="post" onsubmit="return formVlidation();">
 
 <div> お時間
@@ -16,39 +9,40 @@ if(isset($_SESSION['ninsho'])){
 </div>
 
 <div><i>必須</i><label for="kibobi">ご予約日時</label>
-	<input type="text" name="kibobi" id="kibobi"  size="16" autocomplete="off" readonly required /> 
-	<input type="text" name="kibojikan" id="kibojikan" placeholder="時間を選んでください" size="12" autocomplete="off" readonly required /> 
+	<input type="text" name="kibobi" id="kibobi" placeholder="ランチかディナーを選んでください" size="32" autocomplete="off" readonly required /> 
 </div>
 
 <div id="courceBox"><i>必須</i> コース
 	<select name="cource" id="cource"  disabled="">
 		<option id="defop" value="" selected>ランチかディナーを選んでください｡
-	
 		<?php 
 			$dbh = connectDB('yyk');
 				// データベースから コース名を持ってくるのでsql文を発行する
 			$sql='SELECT * FROM course WHERE category >=?';
 			$stmt = pdoexecute($sql,0);   // ユーザ定義関数(自作)
-
-			$_SESSION['cource']	= array();
+				
 			foreach ($stmt as  $value) {
-				$_SESSION['cource'][] = $value["courseMei"];
-				echo "<option class='{$value["category"]}' value='{$value["courseID"]}'>{$value["courseMei"]}";
+                echo "<option class='{$value["category"]}' value='{$value["courseID"]}'>{$value["courseMei"]}";
+                $_SESSION['cource'][$value["courseID"]]=$value["courseMei"];
 			}     // htmlのオプションタグを生成しているとこ
 		?>
-	
 	</select> 
 	 <div class="balloon"><strong>!</strong>コースを選んでください</div>
 
 </div>  
 
 <div><i>必須</i><label>ご予約人数</label>
-	<input type="number" name="ninzu" id="ninzu" max="12" min="1" required > 名様
+    <select name="ninzu" id="ninzu" required>
+
+<script>
+	
+</script>       
+
+    </select>名様
 	<div class="balloon"><strong>!</strong>有効な値を入力してください｡<br>有効な値として近いのは1と2です｡</div>
 </div>
 
-<div><i>必須</i><label>メール</label>
-<input type="email" name="email" id="email" value="<?php echo isset($ninsho['mail'])?$ninsho['mail']:''?>" required >
+<div><i>必須</i><label>メール</label><input type="text" name="email" id="email" value="<?php echo isset($ninsho['mail'])?$ninsho['mail']:''?>" required >
 	<!-- ログインしていればここに値がでる｡@はしていない場合に警告が出ない用にするため -->
 	<div class="balloon"><strong>!</strong>メールアドレスの書式が違います</div>
 	<div class="balloon"><strong>!</strong>このメールアドレスは会員登録済みです。ログイン
@@ -61,7 +55,7 @@ if(isset($_SESSION['ninsho'])){
 </div>
 
 <div><label>〒</label>
-	<input type="text" name="zip" id="zip" maxlength="7" value="<?=@$ninsho['zip']?>"  onkeyup="AjaxZip3.zip2addr(this,'','addr','addr');">
+	<input type="text" name="zip" maxlength="7" value="<?=@$ninsho['zip']?>"  onkeyup="AjaxZip3.zip2addr(this,'','addr','addr');">
 </div>
 
 <div><label>ご住所</label>
@@ -92,14 +86,11 @@ if(isset($_SESSION['ninsho'])){
 <?php 
     } //isset End
      // CSRF対策
-	$_SESSION['sid']=token(); // サーバーが保存しているセッションID(通信が成立した時点で個別に与えられる情報,)を受け取る 
+		 $_SESSION['sid']=token(); 
 ?>
 	<input type="hidden" name="token" value="<?=$_SESSION['sid']?>">
 	<p> <input type="submit" id="soshin" value="確認へ" ></p>
 </form>
 <script src="./datetimepicker/jquery.datetimepicker.js" charset="UTF-8"></script>
 <script src="autokana-master/jquery.autoKana.js" charset="UTF-8"></script>
-<script src="js/form_validate.1.js" charset="UTF-8"></script>
-<script>
 
-</script>

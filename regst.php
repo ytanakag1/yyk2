@@ -1,13 +1,14 @@
-<?php session_start();	///06_php/yyk/regst.php
- ini_set('display_errors', "On"); 
-if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
-	//	echo '<meta http-equiv="refresh" content="5; URL=\'./yoyaku.php\'" />';		// htmlのメタタグで5秒でリダイレクトさせる
-		echo "<a href='./yoyaku.php'>フォーム</a>から正しく入力してください";
+<?php 
+session_start();	
+include "connect.php" ;
+$dbh = connectDB( "yyk" );
+
+if ( empty( $_SESSION['yoyaku_post'] ) || $_SESSION['sid']==@$_SESSION['sid2'] ) {  //セッションがなければ
+		echo '<meta http-equiv="refresh" content="5; URL=\'./\'" />';	// h5秒でリダイレクト
 		exit();  // ここで中断
 	} 
 
   $yoyaku_post = $_SESSION['yoyaku_post']; // ローカル変数に代入
-  //var_dump($yoyaku_post);exit();
 //会員希望かどうか $kibo\
 	$kibo = empty($yoyaku_post['パスワード']) ? 0 :1 ;
 
@@ -20,8 +21,6 @@ if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
   	$hash = '';
   }
 
-  include "connect.php" ;
-	$dbh = connectDB( "yyk" );
 		//未ログインなので、メールアドレスで検索して ヒットした行数と,顧客IDを取得
 	$sql = "SELECT count(mail) , kokyakuID ,pswd FROM kokyak 
 			WHERE mail = '{$yoyaku_post['メール']}'";
@@ -34,7 +33,7 @@ if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
 			$result_arr = $result[0];		//取得結果の0行目を取り出して代入
 
 
-    // try {			// 例外的エラーを捕捉して意味不明なエラーを出さない
+     try {			// 例外的エラーを捕捉して意味不明なエラーを出さない
      $dbh->beginTransaction();	// トランザクションの開始
 
 		 $token = token();
@@ -82,12 +81,16 @@ if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
 				$end_date = date("Y-m-d H:i:s",strtotime('+1 hour',strtotime($start_date)));
 			 	
       //コミット
-      $dbh->commit();
-  //  }catch(PDOException $e){
+			$dbh->commit();
+			$_SESSION['sid2'] = $_SESSION['sid']; //2重送信防止
+
+   }catch(PDOException $e){
   
-  //   $dbh->rollback();
-  //   echo "データベースに接続時エラーが発生しました";
-  // }     
+     $dbh->rollback();
+     echo "データベースに接続時エラーが発生しました";
+	 }   
+
+	try{
       $to = $yoyaku_post['メール'] ;   //宛先メールアドレス
       $url = 'https://'.$_SERVER["HTTP_HOST"] ;
       // 送信元
@@ -96,7 +99,7 @@ if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
 	  $mailFrom = "From: " ;
 	  $from_mail = 'ginzo@ultimai.org';
 	  // 送信者情報の設定
-	  $from = "出雲川開発 ";
+	  $from = "出雲川開発";
 	  $header = '';
 	  $header .= "Content-Type: text/plain; charset=\"ISO-2022-JP\" \r\n";
 	  $header .= "Return-Path: " . $from_mail . " \r\n";
@@ -122,7 +125,11 @@ if ( empty( $_SESSION['yoyaku_post'] )) {  //セッションがなければ
 			   mail($to, $subject, $honbun, $header); 
     			echo $to  . "へ送信しました\n";
 									echo "<P>ご予約ありがとうございます。<br>只今確認メールを送信しました。</p>
-									<p><a href ='/'>Home</a>"; 
+									<p><a href ='./'>Home</a>"; 
+  }catch(PDOException $e){
+     echo "メールサーバーへ接続できませんでした";
+	}  
+	//メールの終わり								
 			 $_SESSION['yoyaku_post']=NULL ;  
 			 $_POST =NULL ;	
 	
