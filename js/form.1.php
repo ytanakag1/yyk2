@@ -1,4 +1,4 @@
-<?php 
+<?php  //html
 if(isset($_SESSION['ninsho'])){
 	$ninsho= $_SESSION['ninsho'];
 	echo "<script>var email = '", $ninsho['mail'] ,"'</script>";

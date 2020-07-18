@@ -1,7 +1,9 @@
 <?php  
-  session_start(); // セッションを使う場合に文字出力より前で宣言
+  session_start(); // html//yoyaku 店舗
   ini_set('display_errors', "On");
   require_once "./connect.php";
+
+
 ?>  
 <!DOCTYPE html><html lang="ja"><head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +17,7 @@
     display: block;width: 1.5em;height: 1.5em;position: absolute;top: 0;right: 0;color: #000;border: 1px solid;text-decoration: none;}
    .modal .inner {    box-shadow: 1px 2px 5px #aaa; width: 38em;text-align: left;}
 </style>
+
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
     <script src="fullcalendar/lib/jquery.min.js"></script>
@@ -56,5 +59,6 @@
         <div id='calendar'></div>
 
 <script src="js/calendar.1.js"></script>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-
+// html
 $(document).ready(function () {
     var calendar = $('#calendar').fullCalendar({
         editable: true,
@@ -11,8 +11,8 @@ $(document).ready(function () {
                 event.allDay = false;
             }
         },
-        selectable: false,
-        selectHelper: false,
+        selectable: true,
+        selectHelper: true,
       
         select: function (start, end, allDay) {  //クリックイベント
          
@@ -25,20 +25,20 @@ $(document).ready(function () {
             return false;
         },
         
-        editable: false,
-        // eventDrop: function (event, delta) {
-        //     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-        //     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
-        //     $.ajax({
-        //         url: 'edit-event.php',
-        //         data: 'title=' + event.title + '&start=' + start + '&yoyakuID=' + event.yoyakuID + '&id=' + event.id,
-        //         type: "POST",
-        //         success: function (response) {
-        //             console.log(response);
-        //             displayMessage("Updated Successfully");
-        //         }
-        //     });
-        // },
+        editable: true,
+        eventDrop: function (event, delta) {
+            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+            $.ajax({
+                url: 'edit-event.php',
+                data: 'title=' + event.title + '&start=' + start + '&yoyakuID=' + event.yoyakuID + '&id=' + event.id,
+                type: "POST",
+                success: function (response) {
+                    console.log(response);
+                    displayMessage("Updated Successfully");
+                }
+            });
+        },
         eventClick: function (event) {
             $('#delete').click(function(){
                 $.ajax({

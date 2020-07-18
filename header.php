@@ -12,7 +12,7 @@
 <script src="fullcalendar/lib/jquery.min.js"></script>
 <script src="fullcalendar/lib/moment.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
-<script src="js/calendar.1.js"></script>
+<script src="js/calendar.js"></script>
 
 </head>
 <body>
